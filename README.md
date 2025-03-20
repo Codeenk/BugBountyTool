@@ -1,138 +1,268 @@
-# Bug Bounty Tool - Beta Testing Guide
+# Bug Bounty Desktop Application
 
-Thank you for participating in the beta testing of the Bug Bounty Tool! Your feedback is invaluable in helping us improve the application before its official release.
+A comprehensive desktop application for security researchers and bug bounty hunters that combines various security testing and reconnaissance capabilities in a user-friendly interface.
 
-## About the Bug Bounty Tool
+Bug Bounty Tool![image](https://github.com/user-attachments/assets/04bafa08-2ccf-45bc-8d48-0560e4805c97)
 
-The Bug Bounty Tool is a comprehensive desktop application that combines various security testing and reconnaissance capabilities in a user-friendly interface. It's designed to assist security researchers and bug bounty hunters in their workflow.
 
-## Beta Version Information
+## Table of Contents
+- [Features](#features)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Quick Start](#quick-start)
+- [Usage Guide](#usage-guide)
+- [Troubleshooting](#troubleshooting)
+- [Contributing](#contributing)
+- [Security Notice](#security-notice)
+- [License](#license)
 
-- **Version:** 1.0.0-beta
-- **Release Date:** [Current Date]
-- **Platform Support:** Windows 10/11
+## Features
 
-## Installation Instructions
+### 1. HTTPS Traffic Interception
+- Real-time HTTP/HTTPS traffic monitoring
+- Request and response modification
+- Token extraction (JWT, API keys, Bearer tokens)
+- Request replay functionality
+- Traffic logging and analysis
 
-1. Download the `BugBountyTool_Setup.exe` installer from the provided link
-2. Run the installer and follow the on-screen instructions
-3. The application will be installed to your Program Files directory by default
-4. A desktop shortcut will be created automatically
+### 2. Subdomain Discovery
+- DNS-based subdomain enumeration
+- Certificate transparency log searching
+- Common subdomain brute forcing
+- Progress tracking and result visualization
+- Export capabilities
 
-## External Tool Requirements
+### 3. Port Scanning
+- Nmap integration for comprehensive port scanning
+- Fallback to basic socket scanning
+- Service detection and version identification
+- Custom port range specification
+- Thread-safe operation
 
-The Bug Bounty Tool relies on several external tools for full functionality:
+### 4. Directory Fuzzing
+- Web directory and file discovery
+- Custom wordlist support
+- Status code tracking
+- Response size analysis
+- Progress monitoring
 
-1. **Nmap**: Download from https://nmap.org/download.html and install
-2. **Nuclei**: Download from https://github.com/projectdiscovery/nuclei/releases
-3. **XSStrike**: Clone from https://github.com/s0md3v/XSStrike
+### 5. Vulnerability Scanning
+- Integration with multiple security tools:
+  - Nmap for network vulnerability scanning
+  - Nuclei for web vulnerability detection
+  - XSStrike for cross-site scripting detection
+- Customizable tool selection
+- Detailed vulnerability reporting
+- Risk scoring system
 
-The application will check for these tools and provide instructions if they're missing.
+### 6. Reporting
+- Multiple report formats (HTML, PDF, JSON)
+- Comprehensive vulnerability details
+- Risk scoring and categorization
+- Timestamp and scan metadata
+- Exportable reports with recommendations
 
-## Features to Test
+## Prerequisites
 
-Please focus your testing on the following key features:
+- Python 3.8 or higher
+- Windows 10/11 or Linux/macOS
+- Required external tools:
+  - Nmap (for port scanning)
+  - Nuclei (for web vulnerability scanning)
+  - XSStrike (for XSS testing)
+  - wkhtmltopdf (for PDF report generation)
 
-1. **HTTPS Traffic Interception**
-   - Proxy server functionality
-   - Request/response modification
-   - Token extraction
+## Installation
 
-2. **Subdomain Discovery**
-   - Accuracy of results
-   - Performance with large domains
-   - Error handling
+### Option 1: Using the Installer (Recommended)
 
-3. **Port Scanning**
-   - Nmap integration
-   - Fallback to socket scanning
-   - Result presentation
+1. Download the latest release from the [Releases](https://github.com/Codeenk/bug-bounty-tool/releases) page
+2. Run the installer (`BugBountyTool_Setup.exe`)
+3. Follow the installation wizard
+4. Launch the application from the desktop shortcut.
 
-4. **Directory Fuzzing**
-   - Custom wordlist support
-   - Performance with large wordlists
-   - Result filtering
+(This option is currently unavailable due to security issues, but you can use the app directly through the .exe in releases section...)
 
-5. **Vulnerability Scanning**
-   - Tool integration (Nmap, Nuclei, XSStrike)
-   - Result accuracy
-   - Performance on different targets
+### Option 2: Manual Installation
 
-6. **Reporting**
-   - HTML/PDF report generation
-   - Report content accuracy
-   - Export functionality
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Codeenk/bug-bounty-tool.git
+   cd bug-bounty-tool
+   ```
 
-## Known Issues
+2. Create and activate a virtual environment:
+   ```bash
+   # Windows
+   python -m venv venv
+   venv\Scripts\activate
 
-- PDF report generation requires wkhtmltopdf to be installed separately
-- Some antivirus software may flag the executable due to its network scanning capabilities
-- Large scans may cause temporary UI freezing
+   # Linux/macOS
+   python3 -m venv venv
+   source venv/bin/activate
+   ```
 
-## Reporting Bugs
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-When reporting bugs, please include:
+4. Install external tools:
+   - Download and install Nmap from https://nmap.org/download.html
+   - Download Nuclei from https://github.com/projectdiscovery/nuclei/releases
+   - Clone XSStrike from https://github.com/s0md3v/XSStrike
+   - Download wkhtmltopdf from https://wkhtmltopdf.org/downloads.html (this is a external software to generate reports and save them in pdf format)
 
-1. Detailed steps to reproduce the issue
-2. Expected behavior vs. actual behavior
-3. Screenshots if applicable
-4. Your system specifications
-5. Any error messages displayed
+## Quick Start
 
-Please submit bug reports via the GitHub Issues page or email to malandkar.sarvesh1@gmail.com.
+1. Launch the application:
+   ```bash
+   # If using manual installation
+   python main.py
 
-## Feedback
+   # If using installer
+   Double-click the desktop shortcut
+   ```
 
-We welcome all feedback on:
-- User interface and experience
-- Feature requests
-- Performance improvements
-- Documentation clarity
+2. Configure your settings:
+   - Set up proxy settings if needed
+   - Configure tool paths
+   - Set up report templates
 
-## Auto-Update Testing
+3. Start scanning:
+   - Enter your target
+   - Select scanning tools
+   - Click "Start Scan"
 
-The application includes an auto-update mechanism. Please test this by:
-1. Checking for updates via Help > Check for Updates
-2. Following the update prompts if available
-3. Verifying the application functions correctly after updating
+## Usage Guide
 
-## Legal Disclaimer and Ethical Use Statement
+### HTTPS Traffic Interception
 
-By using this tool, you agree to the following terms and conditions:
+1. Go to the "Proxy" tab
+2. Configure your proxy settings
+3. Start the proxy server
+4. Configure your browser to use the proxy
+5. Start intercepting traffic
 
-### Legal Disclaimer:
+### Subdomain Discovery
 
-**Authorized Use Only:**
-This tool is intended for authorized security testing and research purposes only. You are solely responsible for ensuring that you have explicit permission to test the target systems. Unauthorized use of this tool on systems or networks that you do not own or have explicit permission to test is illegal and may result in criminal charges, civil penalties, or both.
+1. Navigate to the "Subdomain" tab
+2. Enter your target domain
+3. Select discovery methods
+4. Click "Start Scan"
+5. View results in the table
 
-**Responsibility for Compliance:**
-It is your responsibility to comply with all applicable laws and regulations in your jurisdiction, including but not limited to the Computer Fraud and Abuse Act (CFAA), the General Data Protection Regulation (GDPR), and other relevant laws governing cybersecurity and data privacy.
+### Port Scanning
 
-**Permission for Testing:**
-Always ensure that you have written consent from the organization or individual who owns the target system before conducting any testing. Do not use this tool to scan or attack any system without explicit authorization.
+1. Go to the "Port Scanner" tab
+2. Enter target IP or hostname
+3. Configure port range
+4. Select scanning method
+5. Start the scan
 
-**No Liability for Misuse:**
-The developers of this tool are not responsible for any damages, losses, or legal consequences resulting from the misuse of the tool. By using this tool, you acknowledge and accept that the tool's creators are not liable for any direct or indirect consequences, including but not limited to unauthorized access, loss of data, or system downtime.
+### Directory Fuzzing
 
-### Ethical Use Statement:
+1. Open the "Fuzzer" tab
+2. Enter target URL
+3. Select or upload wordlist
+4. Configure fuzzing options
+5. Start fuzzing
 
-**Respect for Privacy and Confidentiality:**
-When using this tool, you must respect the privacy of individuals and organizations. Do not exploit or publicly disclose any vulnerabilities you discover without proper authorization. If you identify critical vulnerabilities, follow responsible disclosure practices and notify the relevant parties or organizations in a manner that allows them to address the issue.
+### Vulnerability Scanning
 
-**Avoid Harmful Actions:**
-This tool should never be used to cause harm or disruption. Do not use this tool to test systems with the intent to damage, degrade, or disrupt service. All testing should be conducted with a focus on improving security and ensuring that vulnerabilities are responsibly disclosed to the relevant stakeholders.
+1. Navigate to the "Vulnerability" tab
+2. Enter target
+3. Select scanning tools
+4. Configure scan options
+5. Start the scan
 
-**Commitment to Ethical Hacking:**
-Ethical hacking is conducted with the goal of improving security and protecting data. Always adhere to ethical guidelines in your security research. Ensure that any testing is performed in accordance with ethical hacking standards and community best practices.
+## Troubleshooting
 
-**Professional Conduct:**
-You are expected to behave professionally, transparently, and respectfully while using this tool. Ensure that your actions promote positive contributions to the cybersecurity community and work towards building a safer internet for everyone.
+### Common Issues
 
-**By using this tool, you acknowledge and accept that:**
-- You are responsible for ensuring that your activities are legal and authorized.
-- You will only use the tool in compliance with all applicable laws, regulations, and ethical guidelines.
-- You will not hold the developers or distributors of this tool liable for any actions taken using this tool.
+1. **Missing External Tools**
+   - Ensure all required tools are installed
+   - Verify tool paths in settings
+   - Check tool permissions
 
-## Thank You
+2. **Proxy Connection Issues**
+   - Verify proxy settings
+   - Check firewall rules
+   - Ensure certificate is installed
 
-Thank you for helping us improve the Bug Bounty Tool! Your participation in this beta testing phase is greatly appreciated. 
+3. **Scan Failures**
+   - Check target accessibility
+   - Verify network connection
+   - Review error logs
+
+4. **Report Generation Issues**
+   - Ensure wkhtmltopdf is installed
+   - Check file permissions
+   - Verify template files
+
+### Getting Help
+
+- Check the [Wiki](https://github.com/Codeenk/bug-bounty-tool/wiki)
+- Open an [Issue](https://github.com/Codeenk/bug-bounty-tool/issues)
+
+## Contributing
+
+We welcome contributions! Please follow these steps:
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
+
+### Development Setup
+
+1. Clone the repository
+2. Install development dependencies:
+   ```bash
+   pip install -r requirements-dev.txt
+   ```
+3. Set up pre-commit hooks:
+   ```bash
+   pre-commit install
+   ```
+4. Run tests:
+   ```bash
+   pytest
+   ```
+
+### Code Style
+
+- Follow PEP 8 guidelines
+- Use type hints
+- Write docstrings for functions
+- Add tests for new features
+
+## Security Notice
+
+This tool is intended for authorized security testing and research purposes only. Users must:
+
+- Obtain explicit permission before testing any systems
+- Comply with all applicable laws and regulations
+- Follow responsible disclosure practices
+- Respect privacy and confidentiality
+
+See [SECURITY.md](SECURITY.md) for detailed security guidelines.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- [Nmap](https://nmap.org/) for port scanning capabilities
+- [Nuclei](https://github.com/projectdiscovery/nuclei) for vulnerability scanning
+- [XSStrike](https://github.com/s0md3v/XSStrike) for XSS testing
+- All contributors and users of this tool
+
+## Support
+
+For support, please:
+- Check the [documentation](docs/)
+- Open an [issue](https://github.com/Codeenk/bug-bounty-tool/issues)
+- Contact me at malandkar.sarvesh1@gmail.com 
