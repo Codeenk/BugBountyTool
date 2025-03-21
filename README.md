@@ -266,3 +266,8 @@ For support, please:
 - Check the [documentation](docs/)
 - Open an [issue](https://github.com/Codeenk/bug-bounty-tool/issues)
 - Contact me at malandkar.sarvesh1@gmail.com 
+
+Here's the demo of some features:
+
+https://github.com/user-attachments/assets/4d7a3aca-442f-4b3a-85ba-4e1579c56b8c
+
