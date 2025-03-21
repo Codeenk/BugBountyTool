@@ -60,3 +60,10 @@ def main():
 
 if __name__ == '__main__':
     main() 
+
+def display_findings(self, findings):
+    self.results_table.clear()  # Clear previous results
+    for finding in findings:
+        # Assuming you have columns for URL, IP, etc.
+        row = [finding.get('url'), finding.get('ip'), finding.get('template')]
+        self.results_table.addRow(row)  # Add row to your results table
